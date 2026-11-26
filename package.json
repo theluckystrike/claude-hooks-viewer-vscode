@@ -1,0 +1,320 @@
+{
+  "name": "zovo-claude-hooks-viewer",
+  "displayName": "Claude Config & Hooks Viewer",
+  "description": "Inspect Claude Code settings.json files in VS Code: allow and deny rules, PreToolUse and PostToolUse hooks, masked env vars and safety checks, offline.",
+  "version": "0.1.0",
+  "publisher": "zovo",
+  "license": "MIT",
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#0F172A",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theluckystrike/claude-hooks-viewer-vscode"
+  },
+  "bugs": {
+    "url": "https://github.com/theluckystrike/claude-hooks-viewer-vscode/issues"
+  },
+  "homepage": "https://github.com/theluckystrike/claude-hooks-viewer-vscode#readme",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other",
+    "Visualization"
+  ],
+  "keywords": [
+    "claude",
+    "claude-code",
+    "hooks",
+    "settings",
+    "permissions",
+    "security",
+    "audit",
+    "json"
+  ],
+  "main": "./src/extension.js",
+  "activationEvents": [
+    "onUri",
+    "onCustomEditor:zovo-claude-hooks.viewer"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": true
+  },
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "zovo-claude-hooks.viewer",
+        "displayName": "Claude Config & Hooks Viewer",
+        "selector": [
+          {
+            "filenamePattern": "**/.claude/settings.json"
+          },
+          {
+            "filenamePattern": "**/.claude/settings.local.json"
+          },
+          {
+            "filenamePattern": "claude.settings.json"
+          },
+          {
+            "filenamePattern": "*.claude.json"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "commands": [
+      {
+        "command": "zovoClaudeHooks.openWith",
+        "title": "Open in Claude Config & Hooks Viewer",
+        "category": "Claude Config & Hooks Viewer",
+        "icon": "$(shield)"
+      },
+      {
+        "command": "zovoClaudeHooks.openSample",
+        "title": "Open the Sample Claude Settings File",
+        "category": "Claude Config & Hooks Viewer"
+      },
+      {
+        "command": "zovoClaudeHooks.openWalkthrough",
+        "title": "Get Started",
+        "category": "Claude Config & Hooks Viewer"
+      },
+      {
+        "command": "zovoClaudeHooks.moreViewers",
+        "title": "More free tools by Zovo",
+        "category": "Claude Config & Hooks Viewer"
+      },
+      {
+        "command": "zovoClaudeHooks.supportDeveloper",
+        "title": "Support the developer",
+        "category": "Claude Config & Hooks Viewer"
+      },
+      {
+        "command": "zovoClaudeHooks.auditPolicy",
+        "title": "Audit Claude settings safety and permissions (Pro, 1 free try)",
+        "category": "Claude Config & Hooks Viewer"
+      },
+      {
+        "command": "zovoClaudeHooks.diffConfigs",
+        "title": "Compare two Claude settings files (Pro, 1 free try)",
+        "category": "Claude Config & Hooks Viewer"
+      },
+      {
+        "command": "zovoClaudeHooks.exportPolicyDoc",
+        "title": "Export permission and hook docs to Markdown and CSV (Pro, 1 free try)",
+        "category": "Claude Config & Hooks Viewer"
+      },
+      {
+        "command": "zovoClaudeHooks.zovoPro.auditPolicy",
+        "title": "Zovo Pro: Audit Claude settings safety and permissions"
+      },
+      {
+        "command": "zovoClaudeHooks.zovoPro.diffConfigs",
+        "title": "Zovo Pro: Compare two Claude settings files"
+      },
+      {
+        "command": "zovoClaudeHooks.zovoPro.exportPolicyDoc",
+        "title": "Zovo Pro: Export permission and hook docs to Markdown and CSV"
+      },
+      {
+        "command": "zovoClaudeHooks.zovoTitle.auditPolicy",
+        "title": "Zovo Pro: Audit Claude settings safety and permissions"
+      },
+      {
+        "command": "zovoClaudeHooks.zovoTitle.diffConfigs",
+        "title": "Zovo Pro: Compare two Claude settings files"
+      },
+      {
+        "command": "zovoClaudeHooks.zovoTitle.exportPolicyDoc",
+        "title": "Zovo Pro: Export permission and hook docs to Markdown and CSV"
+      },
+      {
+        "command": "zovoClaudeHooks.getPro",
+        "title": "Get Zovo Pro (USD 19 once, all Zovo extensions)",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoClaudeHooks.payWithPayPal",
+        "title": "Pay for Zovo Pro with PayPal (USD 19, team of 5 USD 59)",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoClaudeHooks.unlockWithSponsors",
+        "title": "I already paid: unlock with GitHub Sponsors",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoClaudeHooks.enterLicenseKey",
+        "title": "Enter Zovo Pro license key",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoClaudeHooks.removeLicense",
+        "title": "Remove Zovo Pro from this editor",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoClaudeHooks.payByCard",
+        "title": "Pay for Zovo Pro by card (USD 19)",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoClaudeHooks.enterKey",
+        "title": "Enter a key",
+        "category": "Zovo Pro"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "zovoClaudeHooks.zovoTitle.auditPolicy",
+          "when": "activeCustomEditorId == 'zovo-claude-hooks.viewer' && config.zovoClaudeHooks.showProTools",
+          "group": "zovoPro@1"
+        },
+        {
+          "command": "zovoClaudeHooks.zovoTitle.diffConfigs",
+          "when": "activeCustomEditorId == 'zovo-claude-hooks.viewer' && config.zovoClaudeHooks.showProTools",
+          "group": "zovoPro@2"
+        },
+        {
+          "command": "zovoClaudeHooks.zovoTitle.exportPolicyDoc",
+          "when": "activeCustomEditorId == 'zovo-claude-hooks.viewer' && config.zovoClaudeHooks.showProTools",
+          "group": "zovoPro@3"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "zovoClaudeHooks.openWith",
+          "when": "resourceFilename =~ /settings(\\.local)?\\.json$|\\.claude\\.json$/i && !explorerResourceIsFolder",
+          "group": "navigation@9"
+        },
+        {
+          "command": "zovoClaudeHooks.zovoPro.auditPolicy",
+          "when": "resourceFilename =~ /settings(\\.local)?\\.json$|\\.claude\\.json$/i && !explorerResourceIsFolder && config.zovoClaudeHooks.showProTools",
+          "group": "zovoPro@1"
+        },
+        {
+          "command": "zovoClaudeHooks.zovoPro.diffConfigs",
+          "when": "resourceFilename =~ /settings(\\.local)?\\.json$|\\.claude\\.json$/i && !explorerResourceIsFolder && config.zovoClaudeHooks.showProTools",
+          "group": "zovoPro@2"
+        },
+        {
+          "command": "zovoClaudeHooks.zovoPro.exportPolicyDoc",
+          "when": "resourceFilename =~ /settings(\\.local)?\\.json$|\\.claude\\.json$/i && !explorerResourceIsFolder && config.zovoClaudeHooks.showProTools",
+          "group": "zovoPro@3"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "zovoClaudeHooks.auditPolicy",
+          "when": "config.zovoClaudeHooks.showProTools"
+        },
+        {
+          "command": "zovoClaudeHooks.diffConfigs",
+          "when": "config.zovoClaudeHooks.showProTools"
+        },
+        {
+          "command": "zovoClaudeHooks.exportPolicyDoc",
+          "when": "config.zovoClaudeHooks.showProTools"
+        },
+        {
+          "command": "zovoClaudeHooks.zovoPro.auditPolicy",
+          "when": "false"
+        },
+        {
+          "command": "zovoClaudeHooks.zovoPro.diffConfigs",
+          "when": "false"
+        },
+        {
+          "command": "zovoClaudeHooks.zovoPro.exportPolicyDoc",
+          "when": "false"
+        },
+        {
+          "command": "zovoClaudeHooks.zovoTitle.auditPolicy",
+          "when": "false"
+        },
+        {
+          "command": "zovoClaudeHooks.zovoTitle.diffConfigs",
+          "when": "false"
+        },
+        {
+          "command": "zovoClaudeHooks.zovoTitle.exportPolicyDoc",
+          "when": "false"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Claude Config & Hooks Viewer",
+      "properties": {
+        "zovoClaudeHooks.maxFileMB": {
+          "type": "number",
+          "default": 8,
+          "minimum": 1,
+          "maximum": 64,
+          "description": "Files up to this size open in the Claude Config & Hooks Viewer."
+        },
+        "zovoClaudeHooks.pageSize": {
+          "type": "number",
+          "default": 100,
+          "minimum": 20,
+          "maximum": 500,
+          "description": "Rules shown on one page of the permission rule table."
+        },
+        "zovoClaudeHooks.showProTools": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the Zovo Pro tools (policy audit, settings comparison and policy documentation export) in the Command Palette, the Explorer menu, the editor title menu and the viewer toolbar. Everything free stays visible."
+        },
+        "zovoClaudeHooks.askForRating": {
+          "type": "boolean",
+          "default": true,
+          "description": "Ask once for a store rating after 3 Claude settings files open without an error across 2 days. Choosing No thanks never asks again. Nothing is sent anywhere."
+        },
+        "zovoClaudeHooks.showSupportLinks": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the small Rate, More free tools and Zovo Pro links at the bottom of the viewer. Nothing is sent anywhere."
+        },
+        "zovo.claudehooks.trial.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the 7-day Zovo Pro trial button in the Pro panel."
+        }
+      }
+    },
+    "walkthroughs": [
+      {
+        "id": "zovoClaudeHooks.start",
+        "title": "Get started with Claude Config & Hooks Viewer",
+        "description": "Inspect Claude Code settings.json files in VS Code: allow and deny permission rules, PreToolUse and PostToolUse hooks, masked env vars and static safety checks, offline.",
+        "steps": [
+          {
+            "id": "open",
+            "title": "Open a Claude settings file",
+            "description": "Click any .claude/settings.json, .claude/settings.local.json, claude.settings.json or *.claude.json file in the Explorer, or run Open in Claude Config & Hooks Viewer on any open JSON file.\n[Open the sample Claude settings file](command:zovoClaudeHooks.openSample)",
+            "media": {
+              "image": "images/screenshot.png",
+              "altText": "A Claude settings file open in the viewer showing allow and deny rules, PreToolUse and PostToolUse hooks, masked env vars and safety findings."
+            },
+            "completionEvents": [
+              "onCommand:zovoClaudeHooks.openSample"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "test": "node scripts/test.js",
+    "package": "npx -y @vscode/vsce@3 package --no-dependencies"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/theluckystrike/sponsorships?tier_id=679878"
+  }
+}
